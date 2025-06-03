@@ -10,9 +10,9 @@ This project is a Subnet Calculator implemented using the MVC pattern in Python.
 
 ## Project Structure
 
-- **Models** — contains the core logic for subnet calculations.  
-- **Views** — handles user input and displays results.  
-- **Controllers** — connects Models and Views, managing data flow.
+- **Models** - contains the core logic for subnet calculations.  
+- **Views** - handles user input and displays results.  
+- **Controllers** - connects Models and Views, managing data flow.
 
 ## How Subnet Calculations Work
 
