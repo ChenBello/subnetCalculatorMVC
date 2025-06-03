@@ -35,29 +35,35 @@ class NetworkController:
         return str(ip_address)  # Return the valid IP address
 
     def validate_cidr(self, valid_ip: str) -> int:
-        is_valid = False
-        cidr = None
-        while not is_valid:
+        # without output, calculation based on Class only
+        cidr = IPUtils.cidr_based_on_class(valid_ip)
+        print(f"CIDR was automatically set based on IP class: /{cidr}")
+        return cidr
 
-            try:
-                cidr_input = self.view.prompt_for_cidr_input()  # This should call a method to get CIDR
-
-                # Strip the leading slash and validate CIDR
-                cidr_input = cidr_input.strip().lstrip('/')  # Remove leading spaces and the slash
-                if cidr_input == "":
-                    cidr = IPUtils.cidr_based_on_class(valid_ip)
-                    is_valid = True
-                    print(f"CIDR was inferred: /{cidr}")
-
-                elif not cidr_input.isdigit() or not (0 <= int(cidr_input) <= 32):
-                    raise ValueError("Invalid CIDR input. Please enter a number between 0 and 32.")
-                else:
-                    # Convert CIDR to int for further processing
-                    cidr = int(cidr_input)
-                    is_valid = True
-            except (ValueError, IndexError) as e:
-                print(f"Invalid CIDR: {e}. Please try again.")
-        return int(cidr)
+    # def validate_cidr(self, valid_ip: str) -> int:
+    #     is_valid = False
+    #     cidr = None
+    #     while not is_valid:
+    #
+    #         try:
+    #             cidr_input = self.view.prompt_for_cidr_input()  # This should call a method to get CIDR
+    #
+    #             # Strip the leading slash and validate CIDR
+    #             cidr_input = cidr_input.strip().lstrip('/')  # Remove leading spaces and the slash
+    #             if cidr_input == "":
+    #                 cidr = IPUtils.cidr_based_on_class(valid_ip)
+    #                 is_valid = True
+    #                 print(f"CIDR was inferred: /{cidr}")
+    #
+    #             elif not cidr_input.isdigit() or not (0 <= int(cidr_input) <= 32):
+    #                 raise ValueError("Invalid CIDR input. Please enter a number between 0 and 32.")
+    #             else:
+    #                 # Convert CIDR to int for further processing
+    #                 cidr = int(cidr_input)
+    #                 is_valid = True
+    #         except (ValueError, IndexError) as e:
+    #             print(f"Invalid CIDR: {e}. Please try again.")
+    #     return int(cidr)
 
     def validate_partition(self):
         is_valid = False
